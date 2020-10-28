@@ -35,22 +35,35 @@ class game:
 
   async def move(self,action,client):
     if action == "up" and self.player_pos[0] > 1:
-      self.map_[self.player_pos[0]][self.player_pos[1]] = ":white_large_square:"
-      self.player_pos[0] -= 1
+      self.map_[self.player_pos[0]][self.player_pos[1]] = ":black_large_square:"
+      if self.map_[self.player_pos[0]-1][self.player_pos[1]] == ":brown_square:" and self.player_pos[0]-1 > 1:
+        self.player_pos[0] -= 1
+        self.box_pos[0] -= 1
+      else:
+        self.player_pos[0] -= 1
     elif action == "down" and self.player_pos[0] < 5:
-      self.map_[self.player_pos[0]][self.player_pos[1]] = ":white_large_square:"
-      self.player_pos[0] += 1
+      self.map_[self.player_pos[0]][self.player_pos[1]] = ":black_large_square:"
+      if self.map_[self.player_pos[0]+1][self.player_pos[1]] == ":brown_square:" and self.player_pos[0]-1 < 5:
+        self.player_pos[0] += 1
+        self.box_pos[0] += 1
+      else:
+        self.player_pos[0] += 1
     elif action == "r" and self.player_pos[1] < 5:
-      self.map_[self.player_pos[0]][self.player_pos[1]] = ":white_large_square:"
-      self.player_pos[1] += 1
+      self.map_[self.player_pos[0]][self.player_pos[1]] = ":black_large_square:"
+      if self.map_[self.player_pos[0]][self.player_pos[1]+1] == ":brown_square:" and self.player_pos[1]+1 < 5:
+        self.player_pos[1] += 1
+        self.box_pos[1] += 1
+      else:
+        self.player_pos[1] += 1
     elif action == "l" and self.player_pos[1] > 1:
-      self.map_[self.player_pos[0]][self.player_pos[1]] = ":white_large_square:"
-      self.player_pos[1] -= 1
+      self.map_[self.player_pos[0]][self.player_pos[1]] = ":black_large_square:"
+      if self.map_[self.player_pos[0]][self.player_pos[1]-1] == ":brown_square:" and self.player_pos[1]-1 > 1:
+        self.player_pos[1] -= 1
+        self.box_pos[1] -= 1
+      else:
+        self.player_pos[1] -= 1
     elif action == "reset":
-      self.map_ = self.base_map
-      self.player_pos = self.new_pos([])
-      self.box_pos = self.new_pos([self.player_pos])
-      self.end_pos = self.new_pos([self.player_pos,self.box_pos])
+      self.reset()
     
     await self.run(client)
 
@@ -59,12 +72,43 @@ class game:
       if user != client.user:
         await reaction.remove(user)
 
+  def reset(self):
+    self.map_ = self.base_map
+    self.map_[self.player_pos[0]][self.player_pos[1]] = ":black_large_square:"
+    self.map_[self.box_pos[0]][self.box_pos[1]] = ":black_large_square:"
+    self.map_[self.end_pos[0]][self.end_pos[1]] = ":black_large_square:"
+    self.player_pos = self.new_pos([])
+    self.box_pos = self.new_pos([self.player_pos])
+    self.end_pos = self.new_pos([self.player_pos,self.box_pos])
+
+  async def win(self, client):
+    self.reset()
+    embed=discord.Embed(title="You win!", description="Type `$continue` to continue to Level 2 or `$stop` to quit.")
+    embed.set_footer(text="You can also press any reaction to continue.")
+    await self.message.edit(embed=embed)
+
+    def check(reaction, user):
+        return user == self.player and str(reaction.emoji) in ["⬆️","⬇️","⬅️","➡️","🔄"]
+
+    if self.message:
+      try:
+        reaction, user = await client.wait_for('reaction_add', timeout=float("inf"), check=check)
+      except asyncio.TimeoutError:
+        await self.stop()
+      else:
+        await self.remove_reactions(reaction,client)
+        await self.run(client)
+
   async def run(self,client):
     self.map_ = self.base_map
 
-    self.map_[self.player_pos[0]][self.player_pos[1]] = ":grinning:"
     self.map_[self.end_pos[0]][self.end_pos[1]]       = ":question:"
+    self.map_[self.player_pos[0]][self.player_pos[1]] = ":grinning:"
     self.map_[self.box_pos[0]][self.box_pos[1]]       = ":brown_square:"
+
+    if self.map_[self.end_pos[0]][self.end_pos[1]] == ":brown_square:":
+      await self.win(client)
+      return
 
     _map = ""
     for y in self.map_:
@@ -72,8 +116,8 @@ class game:
         _map += x
       _map += "\n"
 
-    embed=discord.Embed(title="Level 1", description=_map)
-    embed.set_footer(text="W = up A = left S = down D = right R = reset")
+    fake_field = "\n**Enter direction (`up`,`down`,`left`,`right`/`wasd`) or `r` to reset.**\nPlayer: " + self.player.mention
+    embed=discord.Embed(title="Level 1", description=_map+fake_field)
 
     if self.message:
       await self.message.edit(embed=embed)
@@ -95,6 +139,7 @@ class game:
       except asyncio.TimeoutError:
         embed=discord.Embed(title="ERROR", description="Game removed due to inactivity!", color=0xff0000)
         await self.channel.send(embed=embed)
+        await self.stop()
       else:
         if reaction.emoji   == "⬆️":
           await self.remove_reactions(reaction,client)

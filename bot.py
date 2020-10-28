@@ -19,6 +19,7 @@ def save_prefix(_prefix,guild):
 @client.event
 async def on_ready():
   load_settings()
+  await client.change_presence(activity=discord.Game(name="Sokoban"))
   print("Logged in as {0.user}".format(client))
 
 @client.event
@@ -40,14 +41,14 @@ async def on_message(message):
     new_game = game.game(message.channel,message.author)
     games[message.author] = new_game
     await new_game.run(client)
-  elif message.content.lower() in ["w","a","s","d","r"] and message.author in games.keys():
+  elif message.content.lower() in ["w","a","s","d","r","up","down","left","right"] and message.author in games.keys():
     a = message.content.lower()
     player = message.author
     await message.delete()
-    if   a == "w": await games[player].move("up",client)
-    elif a == "a": await games[player].move("l",client)
-    elif a == "s": await games[player].move("down",client)
-    elif a == "d": await games[player].move("r",client)
+    if   a == "w" or a == "up": await games[player].move("up",client)
+    elif a == "a" or a == "left": await games[player].move("l",client)
+    elif a == "s" or a == "down": await games[player].move("down",client)
+    elif a == "d" or a == "right": await games[player].move("r",client)
     elif a == "r": await games[player].move("reset",client)
   elif message.content.startswith(f"{_prefix}set_prefix"):
     if message.author.guild_permissions.administrator:
