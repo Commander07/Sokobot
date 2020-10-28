@@ -5,13 +5,13 @@ import asyncio
 class game:
   def __init__(self,channel,player):
     self.base_map = [
-      [':black_large_square:', ':black_large_square:', ':black_large_square:', ':black_large_square:', ':black_large_square:', ':black_large_square:', ':black_large_square:'],
-      [':black_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':black_large_square:'],
-      [':black_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':black_large_square:'],
-      [':black_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':black_large_square:'],
-      [':black_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':black_large_square:'],
-      [':black_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':black_large_square:'],
-      [':black_large_square:', ':black_large_square:', ':black_large_square:', ':black_large_square:', ':black_large_square:', ':black_large_square:', ':black_large_square:']
+      [':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:'],
+      [':white_large_square:', ':black_large_square:', ':black_large_square:', ':black_large_square:', ':black_large_square:', ':black_large_square:', ':white_large_square:'],
+      [':white_large_square:', ':black_large_square:', ':black_large_square:', ':black_large_square:', ':black_large_square:', ':black_large_square:', ':white_large_square:'],
+      [':white_large_square:', ':black_large_square:', ':black_large_square:', ':black_large_square:', ':black_large_square:', ':black_large_square:', ':white_large_square:'],
+      [':white_large_square:', ':black_large_square:', ':black_large_square:', ':black_large_square:', ':black_large_square:', ':black_large_square:', ':white_large_square:'],
+      [':white_large_square:', ':black_large_square:', ':black_large_square:', ':black_large_square:', ':black_large_square:', ':black_large_square:', ':white_large_square:'],
+      [':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:']
     ]
     self.channel = channel
     self.player = player

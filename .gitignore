@@ -147,3 +147,4 @@ cython_debug/
 
 # Unique
 commit.py
+.vscode/
