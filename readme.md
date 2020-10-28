@@ -5,7 +5,7 @@ Sokobot is a Discord bot written with discord.py that lets you play Sokoban, the
 ## Status
 
 [![Website](https://img.shields.io/website?down_color=red&down_message=DOWN&style=flate&up_color=brightgreen&up_message=UP&url=https%3A%2F%2FCommander07.cf)](https://commander07.cf)
-[![Twitter Follow](https://img.shields.io/twitter/follow/commander073?color=1DA1F2&logo=twitter&flat)](https://twitter.com/intent/user?screen_name=Commander073)
+[![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FCommander07%2FSokobot)](https://twitter.com/intent/tweet?text=Sokobot%20is%20a%20Discord%20bot%20written%20with%20discord.py%20that%20lets%20you%20play%20Sokoban,%20the%20classic%20box-pushing%20puzzle%20game.%20&url=https://github.com/Commander07/Sokobot&hashtags=discord)
 [![License](https://img.shields.io/github/license/commander07/sokobot)](https://github.com/Commander07/Sokobot/blob/main/LICENSE)
 
 
