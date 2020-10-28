@@ -66,5 +66,15 @@ async def on_message(message):
       embed=discord.Embed(title="ERROR", description=f"You are not allowed to you that command!", color=0xff0000)
       await message.channel.send(embed=embed)
       return
-
+  elif message.content.startswith(f"{_prefix}stop"):
+    if message.author in games.keys():
+      await games[message.author].stop()
+      del games[message.author]
+      embed=discord.Embed(title="Success", description="Successfully stopped your game!", color=0x48ff45)
+      await message.channel.send(embed=embed)
+      return
+    else:
+      embed=discord.Embed(title="ERROR", description=f"You don't have a game running!", color=0xff0000)
+      await message.channel.send(embed=embed)
+      return
 client.run(os.getenv("TOKEN"))

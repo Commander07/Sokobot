@@ -28,6 +28,11 @@ class game:
         self.new_pos(p)
     return x
 
+  async def stop(self):
+    await self.message.delete()
+    self.message = None
+    del self
+
   async def move(self,action,client):
     if action == "up" and self.player_pos[0] > 1:
       self.map_[self.player_pos[0]][self.player_pos[1]] = ":white_large_square:"
@@ -84,24 +89,25 @@ class game:
     def check(reaction, user):
         return user == self.player and str(reaction.emoji) in ["⬆️","⬇️","⬅️","➡️","🔄"]
 
-    try:
-      reaction, user = await client.wait_for('reaction_add', timeout=120.0, check=check)
-    except asyncio.TimeoutError:
-      embed=discord.Embed(title="ERROR", description="Game removed due to inactivity!", color=0xff0000)
-      await self.channel.send(embed=embed)
-    else:
-      if reaction.emoji   == "⬆️":
-        await self.remove_reactions(reaction,client)
-        await self.move("up",client)
-      elif reaction.emoji == "⬇️":
-        await self.remove_reactions(reaction,client)
-        await self.move("down",client)
-      elif reaction.emoji == "⬅️":
-        await self.remove_reactions(reaction,client)
-        await self.move("l",client)
-      elif reaction.emoji == "➡️":
-        await self.remove_reactions(reaction,client)
-        await self.move("r",client)
-      elif reaction.emoji == "🔄":
-        await self.remove_reactions(reaction,client)
-        await self.move("reset",client)
+    if self.message:
+      try:
+        reaction, user = await client.wait_for('reaction_add', timeout=120.0, check=check)
+      except asyncio.TimeoutError:
+        embed=discord.Embed(title="ERROR", description="Game removed due to inactivity!", color=0xff0000)
+        await self.channel.send(embed=embed)
+      else:
+        if reaction.emoji   == "⬆️":
+          await self.remove_reactions(reaction,client)
+          await self.move("up",client)
+        elif reaction.emoji == "⬇️":
+          await self.remove_reactions(reaction,client)
+          await self.move("down",client)
+        elif reaction.emoji == "⬅️":
+          await self.remove_reactions(reaction,client)
+          await self.move("l",client)
+        elif reaction.emoji == "➡️":
+          await self.remove_reactions(reaction,client)
+          await self.move("r",client)
+        elif reaction.emoji == "🔄":
+          await self.remove_reactions(reaction,client)
+          await self.move("reset",client)
