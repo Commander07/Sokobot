@@ -9,6 +9,7 @@
   <a target="_blank" href="LICENSE" title="License: MIT"><img src="https://img.shields.io/github/license/commander07/sokobot"></a>
   <a target="_blank" href="https://twitter.com/intent/tweet?text=Sokobot%20is%20a%20Discord%20bot%20written%20with%20discord.py%20that%20lets%20you%20play%20Sokoban,%20the%20classic%20box-pushing%20puzzle%20game.%20&url=https://github.com/Commander07/Sokobot&hashtags=discord" title="Share on Twitter"><img src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FCommander07%2FSokobot"></a>
   <a target="_blank" href="https://commander07.cf"><img alt="Website" src="https://img.shields.io/website?down_color=red&down_message=DOWN&style=flate&up_color=green&up_message=UP&url=https%3A%2F%2FCommander07.cf"></a>
+  <a target="_blank"><img alt="Version" src="https://img.shields.io/badge/dynamic/json?color=blue&label=version&prefix=v&query=version&url=https%3A%2F%2Fraw.githubusercontent.com%2FCommander07%2FSokobot%2Fmain%2Fdata%2Fvalues.json"></a>
 </p>
 
 <p align="center">
