@@ -12,7 +12,7 @@
   <a target="_blank"><img alt="Version" src="https://img.shields.io/badge/dynamic/json?color=green&label=version&prefix=v&query=version&url=https%3A%2F%2Fraw.githubusercontent.com%2FCommander07%2FSokobot%2Fmain%2Fdata%2Fvalues.json"></a>
   <a target="_blank" href=""><img alt="Uptime" src="https://img.shields.io/uptimerobot/ratio/m786241270-00f6d056a098b2de3035d425"></a>
   <a target="_blank" href="https://discord.gg/gNFBk7s"><img alt="Support" src="https://img.shields.io/discord/770377709216858143?label=support"></a>
-  <a target="_blank" href="https://discord.com/api/oauth2/authorize?client_id=770376843622088714&permissions=8&scope=bot"><img alt="Support" src="https://img.shields.io/badge/invite-bot-green"></a>
+  <a target="_blank" href="https://discord.com/api/oauth2/authorize?client_id=770376843622088714&permissions=8&scope=bot"><img alt="Bot invite" src="https://img.shields.io/badge/invite-bot-green"></a>
 
 </p>
 
