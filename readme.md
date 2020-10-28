@@ -28,7 +28,7 @@ $ python3 -m pip install -r requirements.txt
 $ git clone https://github.com/Commander07/sokobot.git
 
 # change the working directory to sokobot
-cd sokobot
+$ cd sokobot
 
 # create and activate python environment
 $ python3 -m venv bot-env
