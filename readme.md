@@ -55,3 +55,29 @@ $ source bot-env/bin/activate
 # install the requirements
 $ python3 -m pip install -r requirements.txt
 ```
+
+## Usage
+
+### Windows
+
+```console
+# create a .env file and add your bot token as the variable TOKEN
+$ notepad .env
+
+# start bot
+$ python bot.py
+```
+
+### Linux
+
+```console
+# create a .env file and add your bot token as the variable TOKEN
+$ nano .env
+
+# start bot
+$ python bot.py
+```
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Feel free to create a fork and use the code.
